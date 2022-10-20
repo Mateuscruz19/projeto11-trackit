@@ -4,8 +4,14 @@ import Login from './Login';
 import Register from './Register';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './Home';
+import { createContext, useContext } from 'react';
+
 
 export default function App(){
+
+
+
+    
     return (
         <>
         <BrowserRouter>

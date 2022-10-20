@@ -2,15 +2,21 @@ import React from 'react';
 import styled from 'styled-components';
 import Logo from './assets/img/logo.png'
 import { Link } from 'react-router-dom';
+import { Circles } from 'react-loader-spinner'
+import { useState, useEffect } from 'react';
 
 export default function Login(){
+
+    const [Loading, setLoading] = useState(false)
+
+
     return (
         <>
             <Screen1Login>
                 <Screen1Logo src={Logo} alt="Logo em formato de seta indo para cima" />
                 <Screen1Email placeholder='Email'></Screen1Email>
                 <Screen1Pass placeholder='Senha'></Screen1Pass>
-                <Screen1Button>Entrar</Screen1Button>
+                <Screen1Button>{Loading ? <Circles width={"30px"} color='white'/> : "Salvar"}</Screen1Button>
                 <Link to="/Cadastro">
                     <Scren1Create>Não tem uma conta? Cadastre-se!</Scren1Create>
                 </Link>
@@ -90,6 +96,9 @@ const Screen1Button = styled.button`
     border:none;
     background: #52B6FF;
     cursor: pointer;
+    display:flex;
+    justify-content:center;
+    align-items:center;
 
     // Placeholder text-css
     border-radius: 4.63636px;
