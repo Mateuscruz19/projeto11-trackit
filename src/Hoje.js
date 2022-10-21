@@ -1,27 +1,17 @@
-import React from 'react';
-import styled from 'styled-components';
-import { createGlobalStyle } from 'styled-components'
-import { AuthContext } from './context.js/auth';
-import { useState, useEffect,useContext } from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
+import { createGlobalStyle } from "styled-components";
 
-export default function Historico(){
 
-    const { User } = useContext(AuthContext);
-
+export default function Hoje(){
+    
     return(
         <>
-        <GlobalStyle/>
-        <Screen2Header>
-          <Screen2Logo>TrackIt</Screen2Logo>
-          <Screen2UserPhoto src={User.image}></Screen2UserPhoto>
-        </Screen2Header>
 
-        <Screen2Title>Historico</Screen2Title>
-        <Screen2Text>Em breve você poderá ver o histórico dos seus hábitos aqui!</Screen2Text>
 
-        <Screen2Footer>
-            <Link to={"/Habitos"}>
+             <Screen2Footer>
+         <Link to={"/Habitos"}>
                 <Screen2Habitos>Hábitos</Screen2Habitos>
             </Link>
             <Link to={"/Hoje"}>
@@ -34,39 +24,6 @@ export default function Historico(){
         </>
     )
 }
-
-const Screen2Title = styled.p`
-
-    width: 100px;
-    height: 29px;
-    left: 17px;
-    top: 98px;
-    font-family: 'Lexend Deca';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 22.976px;
-    line-height: 29px;
-    color: #126BA5;
-    margin-top:100px;
-    padding:25px;
-`
-
-const Screen2Text = styled.p`
-
-    width: 338px;
-    height: 74px;
-    left: 15px;
-    top: 144px;
-    font-family: 'Lexend Deca';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 17.976px;
-    line-height: 22px;
-    color: #666666;
-    padding:25px;
-    margin-top:-30px;
-    
-    `
 
 const Screen2Header = styled.header`
 
@@ -155,6 +112,8 @@ const Screen2Hoje = styled.p`
     color: #52B6FF;
 
 `
+
+
 
 const Screen2Historico = styled.h1`
 

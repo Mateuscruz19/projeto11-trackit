@@ -9,16 +9,21 @@ export default function Days(props){
     function ClickDay(dia){
         console.log(props.index)
 
-        if(Clicou === false){
-            setClicou(true)
-            props.sa([...props.a,props.index])
-            console.log(props.a)
-        }else if(Clicou === true){
+        if(props.l === true){
             setClicou(false)
-            var index = props.a.indexOf(props.index); // Let's say it's Bob.
-            props.a.splice(index,1);
-            console.log(props.a)
+        }else{
+            if(Clicou === false){
+                setClicou(true)
+                props.sa([...props.a,props.index])
+                console.log(props.a)
+            }else if(Clicou === true){
+                setClicou(false)
+                var index = props.a.indexOf(props.index); // Let's say it's Bob.
+                props.a.splice(index,1);
+                console.log(props.a)
+            }
         }
+     
     }
 
     return(

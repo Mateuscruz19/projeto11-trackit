@@ -6,6 +6,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { createContext, useContext } from 'react';
 import AuthProvider from './context.js/auth';
 import Habitos from './Habitos';
+import Historico from './Historico';
+import Hoje from './Hoje';
 
 export default function App(){
 
@@ -20,7 +22,8 @@ export default function App(){
                 <Route path='/' element={<Login/>}/>
                 <Route path='/Cadastro' element={<Register/>}/>
                 <Route path='/Habitos' element={<Habitos/>}/>
-                <Route path='/historico'/>
+                <Route path='/Historico' element={<Historico/>}/>
+                <Route path='/Hoje' element={<Hoje/>}/>
                 </Routes>
             </AuthProvider>
         </BrowserRouter>

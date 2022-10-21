@@ -9,6 +9,7 @@ import FotoTeste from './assets/img/img_avatar.png'
 import { createGlobalStyle } from 'styled-components'
 import axios from 'axios';
 import { Circles } from 'react-loader-spinner'
+import { Link } from 'react-router-dom';
 
 export default function Habitos(){
 
@@ -26,6 +27,7 @@ export default function Habitos(){
     function SaveNewHabit(){
 
         setLoading(true)
+        setNameNewHabit("")
 
     let body = {
             name: nameNewHabit,
@@ -90,7 +92,7 @@ export default function Habitos(){
             <Screen2HabitosCreate visible={ShowNewhabit} >
                 <Screen2HabitosInput disabled={Loading ? true : false} placeholder='nome do hábito' onChange={(h) => setNameNewHabit(h.target.value)}></Screen2HabitosInput>
                 <Screen2DaysContainer>
-                    {days.map((d, index) => <Days disabled={Loading ? true : false} a={ArrayDaysNew} sa={setArrayDaysNew} index={index} Day={d}>{d}</Days>)}
+                    {days.map((d, index) => <Days l={Loading} disabled={Loading ? true : false} a={ArrayDaysNew} sa={setArrayDaysNew} index={index} Day={d}>{d}</Days>)}
                 </Screen2DaysContainer>
                 <Screen2CancelSaveContainer>
                 <Cancel onClick={Close}>Cancelar</Cancel>
@@ -108,9 +110,15 @@ export default function Habitos(){
 
 
          <Screen2Footer>
-            <Screen2Habitos>Hábitos</Screen2Habitos>
-                    <Screen2Hoje>Hoje</Screen2Hoje>
-            <Screen2Historico>Histórico</Screen2Historico>
+         <Link to={"/Habitos"}>
+                <Screen2Habitos>Hábitos</Screen2Habitos>
+            </Link>
+            <Link to={"/Hoje"}>
+                 <Screen2Hoje>Hoje</Screen2Hoje>
+            </Link>
+            <Link to={"/Historico"}>
+                 <Screen2Historico>Histórico</Screen2Historico>
+            </Link>
         </Screen2Footer>
         
         </>
