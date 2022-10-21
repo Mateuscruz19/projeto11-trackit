@@ -98,7 +98,7 @@ export default function Habitos(){
                 </Screen2CancelSaveContainer>
             </Screen2HabitosCreate>
 
-            <Habito f={setFine} new={AddMore} ha={Miau}></Habito>
+            <Habito f={setFine} new={AddMore} setNew={setMore} ha={Miau}></Habito>
 
 
              {Fine ? <Screen2HabitosNotFound>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito<br/> para começar a trackear!

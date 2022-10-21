@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Trash from './assets/img/Trash.png'
 import axios from 'axios';
 import { AuthContext } from './context.js/auth';
+import { config } from 'localforage';
 
 export default function Habito(props){
 
@@ -40,6 +41,27 @@ export default function Habito(props){
 
     },[props.new])
 
+    function Delete(id){
+       
+        const config = {
+            headers: {
+                Authorization: `Bearer ${User.token}`
+            }
+        }
+
+        console.log(id)
+        const promise = axios.delete(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}`,config)
+        promise.then((res) => {
+            console.log("Delete successful")
+            console.log(res.data)
+            props.setNew(props.new+1)
+        })
+    
+         promise.catch((err) => {
+            console.log('Erro')
+            console.log(err.response)
+         })
+    }
 
 
     return(
@@ -47,7 +69,7 @@ export default function Habito(props){
          {ArrayHabits.map((h, index) => <ConteinerHabito>
             <TitleDiv>
                 <HabitName>{h.name}</HabitName>
-                <img width={"17px"} height="20px" src={Trash}/>
+                <img onClick={() => Delete(h.id)} width={"17px"} height="20px" src={Trash}/>
             </TitleDiv>
           <DaysDiv>
             {days.map((d, i) => <DayButton click={h.days.includes(i)}>{d}</DayButton>)}
