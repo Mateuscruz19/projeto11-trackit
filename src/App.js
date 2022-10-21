@@ -3,9 +3,9 @@ import React from 'react';
 import Login from './Login';
 import Register from './Register';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Home from './Home';
 import { createContext, useContext } from 'react';
-
+import AuthProvider from './context.js/auth';
+import Habitos from './Habitos';
 
 export default function App(){
 
@@ -15,12 +15,15 @@ export default function App(){
     return (
         <>
         <BrowserRouter>
+            <AuthProvider>
             <Routes>
                 <Route path='/' element={<Login/>}/>
                 <Route path='/Cadastro' element={<Register/>}/>
-                <Route path='/teste' element={<Home/>}/>
-                </Routes> 
-        </BrowserRouter>         
+                <Route path='/Habitos' element={<Habitos/>}/>
+                <Route path='/historico'/>
+                </Routes>
+            </AuthProvider>
+        </BrowserRouter>
         </>
     )
 }

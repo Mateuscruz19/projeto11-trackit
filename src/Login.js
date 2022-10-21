@@ -3,15 +3,19 @@ import styled from 'styled-components';
 import Logo from './assets/img/logo.png'
 import { Link } from 'react-router-dom';
 import { Circles } from 'react-loader-spinner'
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from './context.js/auth';
 
 export default function Login(){
 
     const [Loading, setLoading] = useState(false)
     const [Email, setEmail] = useState("")
     const [Senha, setSenha] = useState("")
+
+    const { setUser } = useContext(AuthContext);
+    const { User } = useContext(AuthContext);
 
     let navigate = useNavigate();
 
@@ -24,7 +28,6 @@ export default function Login(){
             password: Senha
         }
 
-        console.log(body)
 
         if(Email === "" && Senha === ""){
             alert("Vamos la,voce nao esta nen tentando! Coloque algo nas barras :D")
@@ -34,9 +37,8 @@ export default function Login(){
 
             promise.then((res) => {
                 setLoading(false)
-                 alert("Login feito com sucesso")
-                  navigate("/teste")
-                  console.log(res.data)
+                setUser(res.data)
+                navigate("/Habitos")
              })
 
              promise.catch((err) => {
