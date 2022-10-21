@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useState, useEffect } from 'react';
-
+import Days from './Days';
 
 export default function Habitos(){
 
@@ -9,11 +9,21 @@ export default function Habitos(){
     const daysClicked = []
     const [DayPress, setDayPress] = useState(false)
     const [ShowNewhabit, setNewHabit] = useState(false)
+    const [nameNewHabit, setNameNewHabit] = useState("")
+    const [ArrayDaysNew, setArrayDaysNew] = useState([])
 
+    function SaveNewHabit(){
 
-    function DayClick(){
+        setNewHabit(false)
 
-        
+     const obj = {
+            name: nameNewHabit,
+            days: ArrayDaysNew
+        }
+
+        console.log(obj)
+        console.log(nameNewHabit)
+        console.log(ArrayDaysNew)
     }
 
     function AddHabit(){
@@ -25,6 +35,9 @@ export default function Habitos(){
 
     }
 
+
+
+
     return(
         <>
         <Screen2Conteiner>
@@ -35,13 +48,13 @@ export default function Habitos(){
             </Screen2HabitosTituloDiv>
 
             <Screen2HabitosCreate visible={ShowNewhabit} >
-                <Screen2HabitosInput placeholder='nome do hábito'></Screen2HabitosInput>
+                <Screen2HabitosInput placeholder='nome do hábito' onChange={(h) => setNameNewHabit(h.target.value)}></Screen2HabitosInput>
                 <Screen2DaysContainer>
-                    {days.map((d) => <DayButton>{d}</DayButton>)}
+                    {days.map((d, index) => <Days a={ArrayDaysNew} sa={setArrayDaysNew} index={index} Day={d}>{d}</Days>)}
                 </Screen2DaysContainer>
                 <Screen2CancelSaveContainer>
                 <Cancel>Cancelar</Cancel>
-                <SaveButton><p>Salvar</p></SaveButton>
+                <SaveButton onClick={SaveNewHabit}><p>Salvar</p></SaveButton>
                 </Screen2CancelSaveContainer>
             </Screen2HabitosCreate>
 
@@ -159,27 +172,6 @@ const Screen2DaysContainer = styled.div`
     display:flex;
 `
 
-const DayButton = styled.div`
-
-    margin-left:5px;
-    width: 30px;
-    height: 30px;
-    left: 36px;
-    top: 218px;
-    background: #FFFFFF;
-    border: 1px solid #D5D5D5;
-    border-radius: 5px;
-    font-family: 'Lexend Deca';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 19.976px;
-    line-height: 25px;
-    color: #DBDBDB;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-`
 
 const Screen2CancelSaveContainer = styled.div`
 

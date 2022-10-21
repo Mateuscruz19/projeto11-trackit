@@ -4,20 +4,58 @@ import Logo from './assets/img/logo.png'
 import { Link } from 'react-router-dom';
 import { Circles } from 'react-loader-spinner'
 import { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 export default function Login(){
 
     const [Loading, setLoading] = useState(false)
+    const [Email, setEmail] = useState("")
+    const [Senha, setSenha] = useState("")
 
+    let navigate = useNavigate();
+
+    function LoginAply(event){
+        event.preventDefault();
+        setLoading(true)
+
+        const body = {
+            email: Email,
+            password: Senha
+        }
+
+        console.log(body)
+
+        if(Email === "" && Senha === ""){
+            alert("Vamos la,voce nao esta nen tentando! Coloque algo nas barras :D")
+        }else{
+
+            const promise = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login", body)
+
+            promise.then((res) => {
+                setLoading(false)
+                 alert("Login feito com sucesso")
+                  navigate("/teste")
+                  console.log(res.data)
+             })
+
+             promise.catch((err) => {
+                alert('Usuário e/ou senha inválidos!')
+                console.log(err.response)
+                setLoading(false)
+             })
+        }
+
+    }
 
     return (
         <>
             <Screen1Login>
                 <Screen1Logo src={Logo} alt="Logo em formato de seta indo para cima" />
-                <Screen1Email placeholder='Email'></Screen1Email>
-                <Screen1Pass placeholder='Senha'></Screen1Pass>
-                <Screen1Button>{Loading ? <Circles width={"30px"} color='white'/> : "Salvar"}</Screen1Button>
-                <Link to="/Cadastro">
+                <Screen1Email disabled={Loading ? true : false} placeholder='Email' onChange={(e) => setEmail(e.target.value)}></Screen1Email>
+                <Screen1Pass disabled={Loading ? true : false} placeholder='Senha' onChange={(p) => setSenha(p.target.value)}></Screen1Pass>
+                <Screen1Button disabled={Loading ? true : false} onClick={LoginAply}>{Loading ? <Circles width={"30px"} color='white'/> : "Salvar"}</Screen1Button>
+                <Link to="/Cadastro" disabled={Loading ? true : false}>
                     <Scren1Create>Não tem uma conta? Cadastre-se!</Scren1Create>
                 </Link>
             </Screen1Login>
@@ -32,6 +70,7 @@ const Screen1Login = styled.div`
     justify-content:center;
     flex-direction:column;
     margin-top:100px;
+
 
 `
 
@@ -57,7 +96,13 @@ const Screen1Email = styled.input`
     font-weight: 400;
     font-size: 19.976px;
     line-height: 25px;
-    color: #EFEFEF;
+
+    &:disabled{
+        background: #F2F2F2;
+    border: 1px solid #D5D5D5;
+    border-radius: 5px;
+
+    }
 
 
 `
@@ -80,8 +125,13 @@ const Screen1Pass = styled.input`
     font-weight: 400;
     font-size: 19.976px;
     line-height: 25px;
-    color: #DBDBDB;
 
+    &:disabled{
+        background: #F2F2F2;
+    border: 1px solid #D5D5D5;
+    border-radius: 5px;
+
+    }
 
 `
 
@@ -109,6 +159,13 @@ const Screen1Button = styled.button`
     line-height: 26px;
     text-align: center;
     color: #EFEFEF;
+
+
+    &:disabled{
+        background: #52B6FF;
+        opacity: 0.7;
+        border-radius: 4.63636px;
+    }
 
 `
 

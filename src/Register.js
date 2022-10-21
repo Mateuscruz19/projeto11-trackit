@@ -21,7 +21,7 @@ export default function Register(){
     function Registrar(event){
         event.preventDefault();
     
-        const obj = {
+        const body = {
             email: Email,
             name: Nome,
             image: Foto,
@@ -30,23 +30,24 @@ export default function Register(){
 
         setLoading(true)
 
-        console.log(obj)
+        console.log(body)
 
-            if(Email == "" && Senha == "" && Nome == "" && Foto == ""){
+            if(Email === "" && Senha === "" && Nome === "" && Foto === ""){
                 alert("Nao deixe nenhum campo vazio! :D")
                 setLoading(false)
             }else{
                 
-                const promise = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up`,obj)
+                const promise = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up",body)
 
                  promise.then((res) => {
                     setLoading(false)
                      alert("Registrado com sucesso,faça login!")
                       navigate("/")
+                      console.log(res.data)
                  })
 
                  promise.catch((err) => {
-                    alert("Erro")
+                    alert("")
                     console.log(err.response)
                     setLoading(false)
                  })
@@ -62,7 +63,7 @@ export default function Register(){
                 <Screen1Pass disabled={Loading ? true : false} placeholder='Senha' onChange={(S) => setSenha(S.target.value)}></Screen1Pass>
                 <Screen1Name disabled={Loading ? true : false} placeholder='Nome' onChange={(N) => setNome(N.target.value)}></Screen1Name>
                 <Screen1Photo disabled={Loading ? true : false} placeholder='Foto' onChange={(F) => setFoto(F.target.value)}></Screen1Photo>
-                    <Screen1Button onClick={Registrar}>{Loading ? <Circles width={"30px"} color='white'/> : "Cadastrar"}</Screen1Button>
+                    <Screen1Button onClick={Registrar}>{Loading ? <Circles width={"30px"} color="white" /> : "Cadastrar"}</Screen1Button>
                     <Link to={"/"}>
                         <Scren1Create>Já tem uma conta? Faça login!</Scren1Create>
                     </Link>
@@ -222,6 +223,8 @@ margin-top:10px;
     border: 1px solid #D5D5D5;
     border-radius: 5px;
 
+    }
+
     &::placeholder{
         font-family: 'Lexend Deca';
     font-style: normal;
@@ -229,7 +232,6 @@ margin-top:10px;
     font-size: 19.976px;
     line-height: 25px;
     color: #AFAFAF;
-    }
     }
     `
 
@@ -247,6 +249,7 @@ const Screen1Button = styled.button`
     display:flex;
     align-items:center;
     justify-content:center;
+    color:white;
 
     // Placeholder text-css
     border-radius: 4.63636px;
