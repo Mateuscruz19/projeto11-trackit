@@ -1,14 +1,52 @@
-import React from "react"
 import styled from "styled-components"
 import Miau from "./miau"
 import Right from "./assets/img/Right.png"
+import axios from 'axios';
+import { AuthContext } from './context.js/auth';
+import React, { useState,useEffect,useContext } from 'react';
 
-export default function Check(){
+
+export default function Check(props){
+
+    const { User } = useContext(AuthContext);
+    const [Habitos, setHabitos] = useState([])
+
+    const config = {
+        headers: {
+            Authorization: `Bearer ${User.token}`
+        }
+    }
+
+    useEffect(() => {
+
+        const promise = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today",config)
+
+        promise.then((res) => {
+            console.log(res.data)
+            console.log("Deu certo")
+            setHabitos(res.data)
+            if(res.data !== []){
+                props.h(true)
+            }
+         })
+
+         promise.catch((err) => {
+            console.log('Erro')
+            console.log(err.response)
+         })
+
+    },[])
+
+
+
     return(
 
-        
+
+
+
+
         <>
-        {Miau.map((h) => 
+        {Habitos.map((h) => 
         <Habito>
             <ContainerTitle>
                     <Title>{h.name}</Title>
@@ -39,7 +77,6 @@ const Habito = styled.div`
 
 const ContainerTitle = styled.div`
 
-    background-color:orange;
     width:240px;
     height:70px;
     display:flex;

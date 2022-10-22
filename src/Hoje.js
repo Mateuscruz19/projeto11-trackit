@@ -11,6 +11,7 @@ import dayjs from "dayjs";
 export default function Hoje(){
     
     const { User } = useContext(AuthContext);
+    const [Have, setHave] = useState(false)
 
      let portugueseDays = ["Domingo", "Segunda", "Terça-Feira", "Quarta-Feira", "Quinta-Feira", "Sexta-Feira", "Sábado"]
 
@@ -29,10 +30,9 @@ export default function Hoje(){
         </Screen2Header>
 
             <Title>{Format}</Title>
-            <NotFound>Nenhum hábito concluído ainda</NotFound>
-            <Porcent>67% dos hábitos concluídos</Porcent>
+            {Have ? <Porcent>67% dos hábitos concluídos</Porcent> : <NotFound>Nenhum hábito concluído ainda</NotFound>}
 
-            <Check></Check>
+            <Check h={setHave}></Check>
   
              <Screen2Footer>
          <Link to={"/Habitos"}>
