@@ -18,7 +18,6 @@ export default function Hoje(){
      const now = dayjs()
      const Dia = dayjs().format("DD/MM")
      const Format = `${portugueseDays[now.$W]}, ${Dia}`
-     console.log(Format)
 
 
     return(
@@ -39,7 +38,9 @@ export default function Hoje(){
                 <Screen2Habitos>Hábitos</Screen2Habitos>
             </Link>
             <Link to={"/Hoje"}>
-                 <Screen2Hoje>Hoje</Screen2Hoje>
+                <Blue>
+                <Screen2Hoje>Hoje</Screen2Hoje>
+                </Blue>
             </Link>
             <Link to={"/Historico"}>
                  <Screen2Historico>Histórico</Screen2Historico>
@@ -48,6 +49,19 @@ export default function Hoje(){
         </>
     )
 }
+
+const Blue = styled.div`
+
+    width: 91px;
+    height: 91px;
+    background: #52B6FF;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    border-radius:70px;
+    margin-bottom:50px;
+
+`
 
 const Screen2Header = styled.header`
 
@@ -92,6 +106,10 @@ const Screen2UserPhoto = styled.img`
 const GlobalStyle = createGlobalStyle`
     body {
         background: #E5E5E5;
+  }
+
+  a{
+    text-decoration:none;
   }
 `
 
@@ -174,7 +192,7 @@ const Screen2Hoje = styled.p`
     font-size: 17.976px;
     line-height: 22px;
     text-align: center;
-    color: #52B6FF;
+    color: #FFFF;
 
 `
 

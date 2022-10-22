@@ -10,6 +10,7 @@ export default function Check(props){
 
     const { User } = useContext(AuthContext);
     const [Habitos, setHabitos] = useState([])
+    const [Refresh, setRefresh] = useState(0)
 
     const config = {
         headers: {
@@ -23,7 +24,6 @@ export default function Check(props){
 
         promise.then((res) => {
             console.log(res.data)
-            console.log("Deu certo")
             setHabitos(res.data)
             if(res.data !== []){
                 props.h(true)
@@ -35,25 +35,62 @@ export default function Check(props){
             console.log(err.response)
          })
 
-    },[])
+    },[Refresh])
 
+
+    function ClickCheck(haha){
+
+
+
+        console.log(haha)
+        if(haha.done === true){
+            console.log("Ele estava ativado,agora sera desativado");
+            setRefresh(Refresh+1)
+
+          const promise = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${haha.id}/uncheck`,haha.id,config)
+          promise.then((res) => {
+            console.log(res.data)
+            console.log("Deu certo")
+         })
+
+         promise.catch((err) => {
+            alert('Erro')
+            console.log(err.response)
+         })
+
+        }else if(haha.done === false){
+            console.log("Ele estava desativado agora sera ativado");
+            console.log(haha)
+            console.log(haha.id)
+            setRefresh(Refresh+1)
+
+            const promise = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${haha.id}/check`,haha.id,config)
+
+            promise.then((res) => {
+                console.log(res.data)
+                console.log("Deu certo")
+             })
+    
+             promise.catch((err) => {
+                alert('Erro')
+                console.log(err.response)
+             })
+
+        }
+    }
 
 
     return(
 
-
-
-
-
         <>
         {Habitos.map((h) => 
-        <Habito>
+        <Habito done={h.done}>
             <ContainerTitle>
                     <Title>{h.name}</Title>
                     <Sequence>Sequência atual: <span>{h.currentSequence} dias</span></Sequence>
                     <Sequence>Seu recorde: {h.highestSequence} dias</Sequence>
             </ContainerTitle>
-            <ContainerCheck done={h.done}>
+            <ContainerCheck onClick={() => ClickCheck(h)} done={h.done}>
                 <img src={Right}/>
             </ContainerCheck>
             

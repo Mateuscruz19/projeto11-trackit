@@ -50,7 +50,7 @@ export default function Habitos(){
             setLoading(false)
             setNewHabit(false)
             setMore(AddMore+1)
-            nameNewHabit("")
+            setNameNewHabit("")
          })
 
          promise.catch((err) => {
@@ -115,7 +115,9 @@ export default function Habitos(){
                 <Screen2Habitos>Hábitos</Screen2Habitos>
             </Link>
             <Link to={"/Hoje"}>
-                 <Screen2Hoje>Hoje</Screen2Hoje>
+                <Blue>
+                <Screen2Hoje>Hoje</Screen2Hoje>
+                </Blue>
             </Link>
             <Link to={"/Historico"}>
                  <Screen2Historico>Histórico</Screen2Historico>
@@ -359,6 +361,9 @@ const GlobalStyle = createGlobalStyle`
     body {
         background: #E5E5E5;
   }
+  a{
+    text-decoration:none;
+  }
 `
 
 
@@ -399,7 +404,7 @@ const Screen2Hoje = styled.p`
     font-size: 17.976px;
     line-height: 22px;
     text-align: center;
-    color: #52B6FF;
+    color: #FFFF;
 
 `
 
@@ -414,5 +419,18 @@ const Screen2Historico = styled.h1`
     line-height: 22px;
     text-align: center;
     color: #52B6FF;
+
+`
+
+const Blue = styled.div`
+
+    width: 91px;
+    height: 91px;
+    background: #52B6FF;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    border-radius:70px;
+    margin-bottom:50px;
 
 `
