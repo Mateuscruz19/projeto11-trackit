@@ -31,6 +31,7 @@ export default function Login(){
 
         if(Email === "" && Senha === ""){
             alert("Vamos la,voce nao esta nen tentando! Coloque algo nas barras :D")
+            setLoading(false)
         }else{
 
             const promise = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login", body)
@@ -38,7 +39,7 @@ export default function Login(){
             promise.then((res) => {
                 setLoading(false)
                 setUser(res.data)
-                navigate("/Habitos")
+                navigate("/Hoje")
              })
 
              promise.catch((err) => {

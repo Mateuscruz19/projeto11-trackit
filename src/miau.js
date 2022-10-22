@@ -1,17 +1,28 @@
 
 
-const Miau = [{
-    name: "Batata",
-    days: [0,6]
-},
-{
-    name: "Arroz",
-    days: [0,3,5]
-},
-{
-    name: "Feijao",
-    days: [5,6]
-}]
+const Miau = [
+    {
+        "id": 1,
+        "name": "Acordar",
+        "done": true,
+        "currentSequence": 3,
+        "highestSequence": 1
+    },
+    {
+        "id": 2,
+        "name": "Dormir",
+        "done": false,
+        "currentSequence": 2,
+        "highestSequence": 1
+    },
+    {
+        "id": 3,
+        "name": "Comer",
+        "done": true,
+        "currentSequence": 1,
+        "highestSequence": 1
+    }
+]
 
 
 

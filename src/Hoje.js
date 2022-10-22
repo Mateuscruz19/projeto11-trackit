@@ -2,14 +2,38 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { createGlobalStyle } from "styled-components";
+import { useState, useEffect,useContext } from 'react';
+import { AuthContext } from './context.js/auth';
+import Check from "./Check";
+import dayjs from "dayjs";
 
 
 export default function Hoje(){
     
+    const { User } = useContext(AuthContext);
+
+     let portugueseDays = ["Domingo", "Segunda", "Terça-Feira", "Quarta-Feira", "Quinta-Feira", "Sexta-Feira", "Sábado"]
+
+     const now = dayjs()
+     const Dia = dayjs().format("DD/MM")
+     const Format = `${portugueseDays[now.$W]}, ${Dia}`
+     console.log(Format)
+
+
     return(
         <>
+ <GlobalStyle/>
+        <Screen2Header>
+          <Screen2Logo>TrackIt</Screen2Logo>
+          <Screen2UserPhoto src={User.image}></Screen2UserPhoto>
+        </Screen2Header>
 
+            <Title>{Format}</Title>
+            <NotFound>Nenhum hábito concluído ainda</NotFound>
+            <Porcent>67% dos hábitos concluídos</Porcent>
 
+            <Check></Check>
+  
              <Screen2Footer>
          <Link to={"/Habitos"}>
                 <Screen2Habitos>Hábitos</Screen2Habitos>
@@ -70,6 +94,47 @@ const GlobalStyle = createGlobalStyle`
         background: #E5E5E5;
   }
 `
+
+const Title = styled.p`
+
+    left: 17px;
+    top: 98px;
+    font-family: 'Lexend Deca';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 22.976px;
+    line-height: 29px;
+    color: #126BA5;
+    margin-top:90px;
+    padding:20px;
+
+`
+
+const NotFound = styled.p`
+
+    font-family: 'Lexend Deca';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 17.976px;
+    line-height: 22px;
+    color: #BABABA;
+    margin-left:20px;
+    
+    `
+
+
+const Porcent = styled.p`
+
+    font-family: 'Lexend Deca';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 17.976px;
+    line-height: 22px;
+    margin-left:20px;
+    color: #8FC549;
+
+`
+
 
 
 

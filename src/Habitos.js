@@ -50,6 +50,7 @@ export default function Habitos(){
             setLoading(false)
             setNewHabit(false)
             setMore(AddMore+1)
+            nameNewHabit("")
          })
 
          promise.catch((err) => {

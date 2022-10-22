@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useState, useEffect } from 'react';
 
+
 export default function Days(props){
 
     const [Clicou, setClicou] = useState(false)
@@ -9,20 +10,18 @@ export default function Days(props){
     function ClickDay(dia){
         console.log(props.index)
 
-        if(props.l === true){
-            setClicou(false)
-        }else{
+        
+
             if(Clicou === false){
                 setClicou(true)
                 props.sa([...props.a,props.index])
                 console.log(props.a)
             }else if(Clicou === true){
                 setClicou(false)
-                var index = props.a.indexOf(props.index); // Let's say it's Bob.
+                var index = props.a.indexOf(props.index);
                 props.a.splice(index,1);
                 console.log(props.a)
             }
-        }
      
     }
 
