@@ -100,19 +100,19 @@ const Screen2Logo = styled.h1`
 
 const Screen2UserPhoto = styled.img`
 
-    padding:10px;
+    margin-top:7px;
     width: 51px;
     height: 51px;
     left: 306px;
     top: 9px;
     border-radius: 98.5px;
-    margin-right:17px;
-    
-`
+    margin-right:25px;
+    border:solid #D5D5D5;
 
+`
 const GlobalStyle = createGlobalStyle`
     body {
-        background: #E5E5E5;
+        background: #1F2223;
   }
   a{
     text-decoration:none;
@@ -127,7 +127,7 @@ const Screen2Footer = styled.footer`
     width: 100%;
     height: 70px;
     bottom:0;
-    background: #FFFFFF;
+    background: #126BA5;
     z-index:1;
     position:fixed;
     display:flex;
@@ -144,7 +144,7 @@ const Screen2Habitos = styled.p`
     font-size: 17.976px;
     line-height: 22px;
     text-align: center;
-    color: #52B6FF;
+    color: #FFFF;
 
 `
 
@@ -157,9 +157,11 @@ const Screen2Hoje = styled.p`
     font-size: 17.976px;
     line-height: 22px;
     text-align: center;
-    color: #FFFF;
+    color: #000000;
 
 `
+
+
 
 const Screen2Historico = styled.h1`
 
@@ -169,7 +171,7 @@ const Screen2Historico = styled.h1`
     font-size: 17.976px;
     line-height: 22px;
     text-align: center;
-    color: #52B6FF;
+    color: #FFFF;
 
 `
 
@@ -177,7 +179,7 @@ const Blue = styled.div`
 
     width: 91px;
     height: 91px;
-    background: #52B6FF;
+    background: #DBDBDB;
     display:flex;
     justify-content:center;
     align-items:center;

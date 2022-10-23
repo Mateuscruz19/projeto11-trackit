@@ -4,12 +4,14 @@ import Trash from './assets/img/Trash.png'
 import axios from 'axios';
 import { AuthContext } from './context.js/auth';
 import { config } from 'localforage';
+import { TrashBinOutline } from 'react-ionicons'
+import { MagnifyingGlass }  from 'react-loader-spinner'
 
 export default function Habito(props){
 
     const days = ["D","S","T","Q","Q","S","S"]
     const { User } = useContext(AuthContext);
-    const [ArrayHabits, setArray] = useState([])
+   const [Erro, setErro] = useState(false)
 
     useEffect(() => {
 
@@ -25,18 +27,20 @@ export default function Habito(props){
 
        promise.then((res) => {
         console.log(res.data)
-        setArray(res.data)
         console.log("Deu certo")
+        props.setArray(res.data)
         if(res.data.length === 0){
             props.f(true)
         }else{
             props.f(false)
+           
         }
      })
 
      promise.catch((err) => {
         console.log('Erro')
         console.log(err.response)
+        setErro(true)
      })
 
     },[props.new])
@@ -63,41 +67,83 @@ export default function Habito(props){
          })
     }
 
+    if (Erro === true) {
+		return <div>Erro na requisição! Tente de novo</div>
+	  }
+
+    if(!Erro && props.ArrayHabits === undefined){
+        return(<ContainerLoading>
+            <MagnifyingGlass
+        visible={true}
+        height="200"
+        width="200"
+        ariaLabel="MagnifyingGlass-loading"
+        wrapperStyle={{}}
+        wrapperClass="MagnifyingGlass-wrapper"
+        glassColor = '#c0efff'
+        color = '#e15b64'
+    />
+     <p>Carregando...</p>
+    </ContainerLoading>)
+    }
 
     return(
         <>
-         {ArrayHabits.map((h, index) => <ConteinerHabito>
+         {props.ArrayHabits.map((h, index) => <ContainerHabito>
             <TitleDiv>
                 <HabitName>{h.name}</HabitName>
-                <img onClick={() => Delete(h.id)} width={"17px"} height="20px" src={Trash}/>
+                <TrashBinOutline color={'#939c9e'}  onClick={() => Delete(h.id)}/>
             </TitleDiv>
           <DaysDiv>
             {days.map((d, i) => <DayButton click={h.days.includes(i)}>{d}</DayButton>)}
           </DaysDiv>
-        </ConteinerHabito>)}
+        </ContainerHabito>)}
         </>
        
     )
 }
 
-const ConteinerHabito = styled.div`
+const ContainerLoading = styled.div`
 
-    width: 340px;
-    height: 91px;
+    width:300px;
+    height:260px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    font-family: 'Lexend Deca';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 22.976px;
+    line-height: 29px;
+    color: #52B6FF;
+
+`
+
+
+const ContainerHabito = styled.div`
+
+    width: 390px;
+    height: 110px;
     left: 17px;
     top: 147px;
-    background: #FFFFFF;
+    background: #121414;
     border-radius: 5px;
-    margin-bottom:30px;
+    margin-bottom:15px;
 
 `
 const TitleDiv = styled.div`
 
     margin:10px;
     height:25px;
-    width:320px;
+    width:370px;
     display:flex;
     justify-content:space-between;
+
+    ion-icon:hover{
+        cursor:pointer;
+    }
+
 `
 const HabitName = styled.p`
 
@@ -108,13 +154,13 @@ const HabitName = styled.p`
     font-weight: 400;
     font-size: 19.976px;
     line-height: 25px;
-    color: #666666;
+    color: #939c9e;
     
 `
 
 const DaysDiv = styled.div`
 
-    margin:10px;
+    margin-left:10px;
     height:35px;
     width:230px;
     display:flex;  
@@ -123,20 +169,19 @@ const DaysDiv = styled.div`
 const DayButton = styled.div`
 
     margin-left:5px;
-    width: 30px;
-    height: 30px;
+    width: 25px;
+    height: 25px;
     left: 36px;
     top: 218px;
-    background: #FFFFFF;
-    border: 1px solid #D5D5D5;
+    border: 1px solid #939c9e;
     border-radius: 5px;
     font-family: 'Lexend Deca';
     font-style: normal;
     font-weight: 400;
     font-size: 19.976px;
     line-height: 25px;
-    background-color: ${props => props.click ? "#DBDBDB" : "#FFFF"};
-    color: ${props => props.click ? " #FFFFFF" : "#CFCFCF"};
+    background-color: ${props => props.click ? "#a2a8aa" : "#121414"};
+    color: ${props => props.click ? "#121414" : "#939c9e"};
     display:flex;
     align-items:center;
     justify-content:center;

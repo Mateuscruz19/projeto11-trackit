@@ -23,6 +23,7 @@ export default function Habitos(){
     const [Loading, setLoading] = useState(false)
     const [AddMore, setMore] = useState(0)
     const [Fine, setFine] = useState(false)
+    const [ArrayHabits, setArray] = useState(undefined)
 
     function SaveNewHabit(){
 
@@ -74,6 +75,10 @@ export default function Habitos(){
         setNewHabit(false)
     }
 
+    function Input(h){
+        setNameNewHabit(h.target.value)
+    }
+
     return(
         <>
 <GlobalStyle/>
@@ -83,15 +88,15 @@ export default function Habitos(){
         </Screen2Header>
 
 
-
-        <Screen2Conteiner>
+        <Screen2Container>
             <Screen2HabitosTituloDiv>
                 <Screen2HabitosTitulo>Meus Habitos</Screen2HabitosTitulo>
                 <Screen2HabitosIconAddHabito onClick={AddHabit}><p>+</p></Screen2HabitosIconAddHabito>
             </Screen2HabitosTituloDiv>
 
+
             <Screen2HabitosCreate visible={ShowNewhabit} >
-                <Screen2HabitosInput disabled={Loading ? true : false} placeholder='nome do hábito' onChange={(h) => setNameNewHabit(h.target.value)}></Screen2HabitosInput>
+                <Screen2HabitosInput disabled={Loading ? true : false} placeholder='nome do hábito' onChange={(h) => Input(h)} value={nameNewHabit} ></Screen2HabitosInput>
                 <Screen2DaysContainer>
                     {days.map((d, index) => <Days l={Loading} disabled={Loading ? true : false} a={ArrayDaysNew} sa={setArrayDaysNew} index={index} Day={d}>{d}</Days>)}
                 </Screen2DaysContainer>
@@ -101,12 +106,11 @@ export default function Habitos(){
                 </Screen2CancelSaveContainer>
             </Screen2HabitosCreate>
 
-            <Habito f={setFine} new={AddMore} setNew={setMore} ha={Miau}></Habito>
-
+            <Habito ArrayHabits={ArrayHabits} setArray={setArray} f={setFine} new={AddMore} setNew={setMore} ha={Miau}></Habito>
 
              {Fine ? <Screen2HabitosNotFound>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito<br/> para começar a trackear!
              </Screen2HabitosNotFound> : ""}
-         </Screen2Conteiner>
+         </Screen2Container>
 
 
 
@@ -129,16 +133,18 @@ export default function Habitos(){
 
 }
 
-const Screen2Conteiner = styled.div`
+const Screen2Container = styled.div`
 
     display:flex;
     align-items:center;
     justify-content:center;
     flex-direction:column; 
     margin-top:70px;
-    
+ 
 
 `
+
+
 
 const Screen2HabitosTituloDiv = styled.div`
 
@@ -158,7 +164,7 @@ const Screen2HabitosTitulo = styled.p`
     font-weight: 400;
     font-size: 22.976px;
     line-height: 29px;
-    color: #126BA5;
+    color: #52B6FF;
 
 `
 
@@ -168,6 +174,7 @@ const Screen2HabitosIconAddHabito = styled.div`
     height: 35px;
     background: #52B6FF;
     border-radius: 4.63636px;
+    cursor: pointer;
 
 p{
     font-family: 'Lexend Deca';
@@ -180,6 +187,7 @@ p{
     display:flex;
     justify-content:center;
     align-items:center;
+    cursor: pointer;
 }
 
 
@@ -189,7 +197,7 @@ const Screen2HabitosCreate =styled.div`
 
     width: 340px;
     height: 180px;
-    background: #FFFFFF;
+    background: #121414;
     border-radius: 5px;
     display:${props => props.visible ? "block" : "none"};
     margin-bottom:25px;
@@ -197,12 +205,12 @@ const Screen2HabitosCreate =styled.div`
 `
 const Screen2HabitosInput = styled.input`
 
-    width: 303px;
+    width: 315px;
     height: 45px;
     left: 36px;
     top: 165px;
-    background: #FFFFFF;
-    border: 1px solid #D5D5D5;
+    background: #2e3333;
+    border: 1px solid #a2a8aa;
     border-radius: 5px;
     display:flex;
     align-items:center;
@@ -213,7 +221,7 @@ const Screen2HabitosInput = styled.input`
     font-weight: 400;
     font-size: 19.976px;
     line-height: 25px;
-    color: #666666;
+    color: #D5D5D5;
 
 &::placeholder{
     font-family: 'Lexend Deca';
@@ -221,7 +229,7 @@ const Screen2HabitosInput = styled.input`
     font-weight: 400;
     font-size: 19.976px;
     line-height: 25px;
-    color: #DBDBDB;
+    color: #a2a8aa;
     }
 
     &:disabled{
@@ -264,6 +272,7 @@ const Cancel = styled.p`
     line-height: 20px;
     text-align: center;
     color: #52B6FF;
+    cursor: pointer;
 
 `
 
@@ -277,6 +286,7 @@ const SaveButton = styled.div`
     align-items:center;
     justify-content:center;
     margin-left:10px;
+    cursor: pointer;
     
 p{
     font-family: 'Lexend Deca';
@@ -347,19 +357,19 @@ const Screen2Logo = styled.h1`
 
 const Screen2UserPhoto = styled.img`
 
-    padding:10px;
+    margin-top:7px;
     width: 51px;
     height: 51px;
     left: 306px;
     top: 9px;
     border-radius: 98.5px;
-    margin-right:17px;
-    
+    margin-right:25px;
+    border:solid #D5D5D5;
 `
 
 const GlobalStyle = createGlobalStyle`
     body {
-        background: #E5E5E5;
+        background: #1F2223;
   }
   a{
     text-decoration:none;
@@ -374,7 +384,7 @@ const Screen2Footer = styled.footer`
     width: 100%;
     height: 70px;
     bottom:0;
-    background: #FFFFFF;
+    background: #126BA5;
     z-index:1;
     position:fixed;
     display:flex;
@@ -391,7 +401,7 @@ const Screen2Habitos = styled.p`
     font-size: 17.976px;
     line-height: 22px;
     text-align: center;
-    color: #52B6FF;
+    color: #FFFF;
 
 `
 
@@ -404,7 +414,7 @@ const Screen2Hoje = styled.p`
     font-size: 17.976px;
     line-height: 22px;
     text-align: center;
-    color: #FFFF;
+    color: #000000;
 
 `
 
@@ -418,7 +428,7 @@ const Screen2Historico = styled.h1`
     font-size: 17.976px;
     line-height: 22px;
     text-align: center;
-    color: #52B6FF;
+    color: #FFFF;
 
 `
 
@@ -426,7 +436,7 @@ const Blue = styled.div`
 
     width: 91px;
     height: 91px;
-    background: #52B6FF;
+    background: #DBDBDB;
     display:flex;
     justify-content:center;
     align-items:center;

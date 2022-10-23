@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { Circles } from 'react-loader-spinner'
+import { createGlobalStyle } from 'styled-components'
 
 export default function Register(){
 
@@ -58,6 +59,7 @@ export default function Register(){
     return (
         <>
             <Screen1Register>
+                <GlobalStyle></GlobalStyle>
                 <Screen1Logo src={Logo} alt="Logo em formato de seta indo para cima" />
                 <Screen1Email disabled={Loading ? true : false} placeholder='Email' onChange={(E) => setEmail(E.target.value)}></Screen1Email>
                 <Screen1Pass disabled={Loading ? true : false} placeholder='Senha' onChange={(S) => setSenha(S.target.value)}></Screen1Pass>
@@ -84,6 +86,15 @@ const Screen1Register = styled.div`
 
 `
 
+const GlobalStyle = createGlobalStyle`
+body {
+    background: #1F2223;
+}
+a{
+text-decoration:none;
+}
+`
+
 const Screen1Logo = styled.img`
     width: 180px;
     height: 178.38px;
@@ -96,9 +107,10 @@ const Screen1Email = styled.input`
     height: 45px;
     left: 36px;
     top: 279px;
-    background: #FFFFFF;
+    background: #2e3333;
     border: 1px solid #D5D5D5;
     border-radius: 5px;
+    color: #D5D5D5;
 
     // Placeholder text-css
     font-family: 'Lexend Deca';
@@ -134,9 +146,10 @@ const Screen1Pass = styled.input`
     height: 45px;
     left: 36px;
     top: 279px;
-    background: #FFFFFF;
+    background: #2e3333;
     border: 1px solid #D5D5D5;
     border-radius: 5px;
+    color: #D5D5D5;
 
     // Placeholder text-css
     font-family: 'Lexend Deca';
@@ -170,9 +183,10 @@ margin-top:10px;
     height: 45px;
     left: 36px;
     top: 279px;
-    background: #FFFFFF;
+    background: #2e3333;
     border: 1px solid #D5D5D5;
     border-radius: 5px;
+    color: #D5D5D5;
 
     // Placeholder text-css
     font-family: 'Lexend Deca';
@@ -201,15 +215,17 @@ color: #AFAFAF;
     `
 
 const Screen1Photo = styled.input`
-margin-top:10px;
+
+    margin-top:10px;
     box-sizing: border-box;
     width: 303px;
     height: 45px;
     left: 36px;
     top: 279px;
-    background: #FFFFFF;
+    background: #2e3333;
     border: 1px solid #D5D5D5;
     border-radius: 5px;
+    color: #D5D5D5;
 
     // Placeholder text-css
     font-family: 'Lexend Deca';
@@ -231,7 +247,6 @@ margin-top:10px;
     font-weight: 400;
     font-size: 19.976px;
     line-height: 25px;
-    color: #AFAFAF;
     }
     `
 

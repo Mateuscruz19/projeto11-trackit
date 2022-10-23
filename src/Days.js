@@ -6,11 +6,11 @@ import { useState, useEffect } from 'react';
 export default function Days(props){
 
     const [Clicou, setClicou] = useState(false)
+    const [Day, setDay] = useState("")
 
     function ClickDay(dia){
         console.log(props.index)
-
-        
+        setDay(dia)
 
             if(Clicou === false){
                 setClicou(true)
@@ -45,8 +45,8 @@ const DayButton = styled.div`
     font-weight: 400;
     font-size: 19.976px;
     line-height: 25px;
-    background-color: ${props => props.click ? "#DBDBDB" : "#FFFF"};
-    color: ${props => props.click ? " #FFFFFF" : "#CFCFCF"};
+    background-color: ${props => props.click ? "#a2a8aa" : "#121414"};
+    color: ${props => props.click ? "#121414" : "#939c9e"};
     display:flex;
     align-items:center;
     justify-content:center;

@@ -8,6 +8,7 @@ import AuthProvider from './context.js/auth';
 import Habitos from './Habitos';
 import Historico from './Historico';
 import Hoje from './Hoje';
+import { createGlobalStyle } from 'styled-components'
 
 export default function App(){
 
