@@ -2,22 +2,24 @@ import React from 'react';
 import styled from 'styled-components';
 import { createGlobalStyle } from 'styled-components'
 import { AuthContext } from './context.js/auth';
-import { useState, useEffect,useContext } from 'react';
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { CircularProgressbar } from 'react-circular-progressbar';
 
 export default function Historico(){
 
     const { User } = useContext(AuthContext);
+    const { P } = useContext(AuthContext);
 
     return(
         <>
         <GlobalStyle/>
         <Screen2Header>
           <Screen2Logo>TrackIt</Screen2Logo>
-          <Screen2UserPhoto src={User.image}></Screen2UserPhoto>
+          <Screen2UserPhoto data-identifier="avatar" src={User.image}></Screen2UserPhoto>
         </Screen2Header>
 
-        <Screen2Title>Historico</Screen2Title>
+        <Screen2Title data-identifier="habit-page-action">Historico</Screen2Title>
         <Screen2Text>Em breve você poderá ver o histórico dos seus hábitos aqui!</Screen2Text>
 
         <Screen2Footer>
@@ -25,12 +27,12 @@ export default function Historico(){
                 <Screen2Habitos>Hábitos</Screen2Habitos>
             </Link>
             <Link to={"/Hoje"}>
-                <Blue>
-                <Screen2Hoje>Hoje</Screen2Hoje>
+            <Blue>
+                    <CircularProgressbar value={P} maxValue={100} text="Hoje"></CircularProgressbar>
                 </Blue>
             </Link>
             <Link to={"/Historico"}>
-                 <Screen2Historico>Histórico</Screen2Historico>
+                 <Screen2Historico data-identifier="historic-page-action">Histórico</Screen2Historico>
             </Link>
         </Screen2Footer>
         </>
@@ -185,5 +187,15 @@ const Blue = styled.div`
     align-items:center;
     border-radius:70px;
     margin-bottom:50px;
+
+    &{
+    font-family: 'Lexend Deca';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 17.976px;
+    line-height: 22px;
+    text-align: center;
+    color: #FFFF;
+    }
 
 `

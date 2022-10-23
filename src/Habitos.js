@@ -1,22 +1,21 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useState, useEffect,useContext } from 'react';
+import { useState,useContext } from 'react';
 import Days from './Days';
 import Miau from './miau';
 import Habito from './Habito';
 import { AuthContext } from './context.js/auth';
-import FotoTeste from './assets/img/img_avatar.png'
 import { createGlobalStyle } from 'styled-components'
 import axios from 'axios';
 import { Circles } from 'react-loader-spinner'
 import { Link } from 'react-router-dom';
+import { CircularProgressbar } from 'react-circular-progressbar';
 
 export default function Habitos(){
 
     const { User } = useContext(AuthContext);
+    const { P } = useContext(AuthContext);
     const days = ["D","S","T","Q","Q","S","S"]
-    const daysClicked = []
-    const [DayPress, setDayPress] = useState(false)
     const [ShowNewhabit, setNewHabit] = useState(false)
     const [nameNewHabit, setNameNewHabit] = useState("")
     const [ArrayDaysNew, setArrayDaysNew] = useState([])
@@ -84,14 +83,14 @@ export default function Habitos(){
 <GlobalStyle/>
         <Screen2Header>
           <Screen2Logo>TrackIt</Screen2Logo>
-          <Screen2UserPhoto src={User.image}></Screen2UserPhoto>
+          <Screen2UserPhoto data-identifier="avatar" src={User.image}></Screen2UserPhoto>
         </Screen2Header>
 
 
         <Screen2Container>
             <Screen2HabitosTituloDiv>
                 <Screen2HabitosTitulo>Meus Habitos</Screen2HabitosTitulo>
-                <Screen2HabitosIconAddHabito onClick={AddHabit}><p>+</p></Screen2HabitosIconAddHabito>
+                <Screen2HabitosIconAddHabito data-identifier="create-habit-btn" onClick={AddHabit}><p>+</p></Screen2HabitosIconAddHabito>
             </Screen2HabitosTituloDiv>
 
 
@@ -101,14 +100,14 @@ export default function Habitos(){
                     {days.map((d, index) => <Days l={Loading} disabled={Loading ? true : false} a={ArrayDaysNew} sa={setArrayDaysNew} index={index} Day={d}>{d}</Days>)}
                 </Screen2DaysContainer>
                 <Screen2CancelSaveContainer>
-                <Cancel onClick={Close}>Cancelar</Cancel>
-                <SaveButton onClick={SaveNewHabit}>{Loading ? <Circles width={"20px"} color='white'/> : <p>Salvar</p>}</SaveButton>
+                <Cancel data-identifier="cancel-habit-create-btn" onClick={Close}>Cancelar</Cancel>
+                <SaveButton data-identifier="save-habit-create-btn" onClick={SaveNewHabit}>{Loading ? <Circles width={"20px"} color='white'/> : <p>Salvar</p>}</SaveButton>
                 </Screen2CancelSaveContainer>
             </Screen2HabitosCreate>
 
             <Habito ArrayHabits={ArrayHabits} setArray={setArray} f={setFine} new={AddMore} setNew={setMore} ha={Miau}></Habito>
 
-             {Fine ? <Screen2HabitosNotFound>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito<br/> para começar a trackear!
+             {Fine ? <Screen2HabitosNotFound data-identifier="no-habit-message">Você não tem nenhum hábito cadastrado ainda. Adicione um hábito<br/> para começar a trackear!
              </Screen2HabitosNotFound> : ""}
          </Screen2Container>
 
@@ -116,15 +115,15 @@ export default function Habitos(){
 
          <Screen2Footer>
          <Link to={"/Habitos"}>
-                <Screen2Habitos>Hábitos</Screen2Habitos>
+                <Screen2Habitos data-identifier="habit-page-action">Hábitos</Screen2Habitos>
             </Link>
             <Link to={"/Hoje"}>
-                <Blue>
-                <Screen2Hoje>Hoje</Screen2Hoje>
+            <Blue>
+                    <CircularProgressbar value={P} maxValue={100} text="Hoje"></CircularProgressbar>
                 </Blue>
             </Link>
             <Link to={"/Historico"}>
-                 <Screen2Historico>Histórico</Screen2Historico>
+                 <Screen2Historico data-identifier="historic-page-action">Histórico</Screen2Historico>
             </Link>
         </Screen2Footer>
         
@@ -442,5 +441,15 @@ const Blue = styled.div`
     align-items:center;
     border-radius:70px;
     margin-bottom:50px;
+
+    &{
+    font-family: 'Lexend Deca';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 17.976px;
+    line-height: 22px;
+    text-align: center;
+    color: #FFFF;
+    }
 
 `

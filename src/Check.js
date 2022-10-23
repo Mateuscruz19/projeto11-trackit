@@ -1,16 +1,17 @@
 import styled from "styled-components"
-import Miau from "./miau"
 import axios from 'axios';
 import { AuthContext } from './context.js/auth';
 import { CheckmarkDoneOutline } from 'react-ionicons'
 import React, { useState,useEffect,useContext } from 'react';
-
+import { MagnifyingGlass }  from 'react-loader-spinner'
 
 export default function Check(props){
 
     const { User } = useContext(AuthContext);
-    const [Habitos, setHabitos] = useState([])
+    const { setP } = useContext(AuthContext);
+    const [Habitos, setHabitos] = useState(undefined)
     const [Refresh, setRefresh] = useState(0)
+    const [Erro, setErro] = useState(false)
 
     const config = {
         headers: {
@@ -25,6 +26,9 @@ export default function Check(props){
         promise.then((res) => {
             console.log(res.data)
             setHabitos(res.data)
+            let Total = parseInt(100/res.data.length*res.data.filter(y => y.done === true).length)
+            props.t(Total)
+            setP(Total)  
             if(res.data !== []){
                 props.h(true)
             }
@@ -33,10 +37,13 @@ export default function Check(props){
          promise.catch((err) => {
             console.log('Erro')
             console.log(err.response)
+            setErro(true)
          })
 
     },[Refresh])
 
+
+    
 
     function ClickCheck(haha){
 
@@ -70,18 +77,38 @@ export default function Check(props){
         }
     }
 
+    if (Erro === true) {
+		return <div>Erro na requisição! Tente de novo</div>
+	  }
+
+    if(!Erro && Habitos === undefined){
+        return(<ContainerLoading>
+            <MagnifyingGlass
+        visible={true}
+        height="250"
+        width="250"
+        ariaLabel="MagnifyingGlass-loading"
+        wrapperStyle={{}}
+        wrapperClass="MagnifyingGlass-wrapper"
+        glassColor = '#c0efff'
+        color = '#e15b64'
+    />
+     <p>Carregando...</p>
+    </ContainerLoading>)
+    }
+
 
     return(
 
         <>
         {Habitos.map((h) => 
         <Habito done={h.done}>
-            <ContainerTitle>
+            <ContainerTitle data-identifier="today-infos">
                     <Title>{h.name}</Title>
                     <Sequence green={h.currentSequence !== 0}>Sequência atual: <span>{h.currentSequence} dias</span></Sequence>
                     <Sequence green={h.currentSequence !== 0}>Seu recorde: <span>{h.highestSequence} dias</span></Sequence>
             </ContainerTitle>
-            <ContainerCheck onClick={() => ClickCheck(h)} done={h.done}>
+            <ContainerCheck data-identifier="done-habit-btn" onClick={() => ClickCheck(h)} done={h.done}>
             <CheckmarkDoneOutline
             color={'#181A1B'} 
               height="50px"
@@ -94,10 +121,29 @@ export default function Check(props){
     )
 }
 
+const ContainerLoading = styled.div`
+
+    width:300px;
+    height:260px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    font-family: 'Lexend Deca';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 22.976px;
+    line-height: 29px;
+    color: #52B6FF;
+    padding:30px;
+
+`
+
+
 const Habito = styled.div`
 
     margin:20px;
-    width: 420px;
+    width: 90%;
     height: 94px;
     left: 18px;
     top: 177px;

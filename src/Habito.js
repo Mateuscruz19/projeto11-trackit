@@ -1,9 +1,7 @@
 import React, { useState,useEffect,useContext } from 'react';
 import styled from 'styled-components';
-import Trash from './assets/img/Trash.png'
 import axios from 'axios';
 import { AuthContext } from './context.js/auth';
-import { config } from 'localforage';
 import { TrashBinOutline } from 'react-ionicons'
 import { MagnifyingGlass }  from 'react-loader-spinner'
 
@@ -91,11 +89,11 @@ export default function Habito(props){
         <>
          {props.ArrayHabits.map((h, index) => <ContainerHabito>
             <TitleDiv>
-                <HabitName>{h.name}</HabitName>
-                <TrashBinOutline color={'#939c9e'}  onClick={() => Delete(h.id)}/>
+                <HabitName data-identifier="input-habit-name">{h.name}</HabitName>
+                <TrashBinOutline data-identifier="delete-habit-btn" color={'#939c9e'}  onClick={() => Delete(h.id)}/>
             </TitleDiv>
           <DaysDiv>
-            {days.map((d, i) => <DayButton click={h.days.includes(i)}>{d}</DayButton>)}
+            {days.map((d, i) => <DayButton data-identifier="week-day-btn" click={h.days.includes(i)}>{d}</DayButton>)}
           </DaysDiv>
         </ContainerHabito>)}
         </>

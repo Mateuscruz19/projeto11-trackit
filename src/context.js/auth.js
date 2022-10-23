@@ -10,9 +10,10 @@ function AuthProvider({children}){
     const [I,setI] = useState("./assets/img/img_avatar.png");
     const [N,setN] = useState("");
     const [T,setT] = useState("");
+    const [P, setP] = useState(0);
 
     return(
-        <AuthContext.Provider value={ {User, setUser,E,setE,I,setI,N,setN,T,setT}}>
+        <AuthContext.Provider value={ {User, setUser,E,setE,I,setI,N,setN,T,setT,P,setP}}>
             {children}
         </AuthContext.Provider>
     )

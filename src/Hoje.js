@@ -6,12 +6,17 @@ import { useState, useEffect,useContext } from 'react';
 import { AuthContext } from './context.js/auth';
 import Check from "./Check";
 import dayjs from "dayjs";
-
+import { CircularProgressbar } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
 
 export default function Hoje(){
     
     const { User } = useContext(AuthContext);
+    const { P } = useContext(AuthContext);
     const [Have, setHave] = useState(false)
+    const [Total, setTotal] = useState(0)
+    const [Feitas, setFeitas] = useState(0)
+
 
      let portugueseDays = ["Domingo", "Segunda", "Terça-Feira", "Quarta-Feira", "Quinta-Feira", "Sexta-Feira", "Sábado"]
 
@@ -25,25 +30,25 @@ export default function Hoje(){
  <GlobalStyle/>
         <Screen2Header>
           <Screen2Logo>TrackIt</Screen2Logo>
-          <Screen2UserPhoto src={User.image}></Screen2UserPhoto>
+          <Screen2UserPhoto data-identifier="avatar" src={User.image}></Screen2UserPhoto>
         </Screen2Header>
 
             <Title>{Format}</Title>
-            {Have ? <Porcent>67% dos hábitos concluídos</Porcent> : <NotFound>Nenhum hábito concluído ainda</NotFound>}
+            {Total !== 0 ? <Porcent>{Total}% dos hábitos concluídos</Porcent> : <NotFound>Nenhum hábito concluído ainda</NotFound>}
 
-            <Check h={setHave}></Check>
+            <Check f={setFeitas} ff={Feitas} tt={Total} t={setTotal} h={setHave}></Check>
   
              <Screen2Footer>
          <Link to={"/Habitos"}>
-                <Screen2Habitos>Hábitos</Screen2Habitos>
+                <Screen2Habitos data-identifier="habit-page-action">Hábitos</Screen2Habitos>
             </Link>
             <Link to={"/Hoje"}>
                 <Blue>
-                <Screen2Hoje>Hoje</Screen2Hoje>
+                    <CircularProgressbar value={P} maxValue={100} text="Hoje"></CircularProgressbar>
                 </Blue>
             </Link>
             <Link to={"/Historico"}>
-                 <Screen2Historico>Histórico</Screen2Historico>
+                 <Screen2Historico data-identifier="historic-page-action">Histórico</Screen2Historico>
             </Link>
         </Screen2Footer>
         </>
@@ -206,5 +211,15 @@ const Blue = styled.div`
     align-items:center;
     border-radius:70px;
     margin-bottom:50px;
+
+    &{
+    font-family: 'Lexend Deca';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 17.976px;
+    line-height: 22px;
+    text-align: center;
+    color: #FFFF;
+    }
 
 `

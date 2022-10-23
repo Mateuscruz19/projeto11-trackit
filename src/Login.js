@@ -17,10 +17,8 @@ export default function Login(){
     const [Senha, setSenha] = useState("")
 
     const { setUser } = useContext(AuthContext);
-    const { User } = useContext(AuthContext);
 
     let navigate = useNavigate();
-
 
     useEffect(() => {
         const nomeUsuario = localStorage.getItem("Usuario");
@@ -34,7 +32,7 @@ export default function Login(){
 
     },[])
 
-
+    
 
     function LoginAply(event){
         event.preventDefault();
@@ -75,11 +73,11 @@ export default function Login(){
             <Screen1Login>
                 <GlobalStyle></GlobalStyle>
                 <Screen1Logo src={Logo} alt="Logo em formato de seta indo para cima" />
-                <Screen1Email disabled={Loading ? true : false} placeholder='Email' onChange={(e) => setEmail(e.target.value)}></Screen1Email>
-                <Screen1Pass type="password" disabled={Loading ? true : false} placeholder='Senha' onChange={(p) => setSenha(p.target.value)}></Screen1Pass>
-                <Screen1Button disabled={Loading ? true : false} onClick={LoginAply}>{Loading ? <Circles width={"30px"} color='white'/> : "Salvar"}</Screen1Button>
+                <Screen1Email data-identifier="input-email" disabled={Loading ? true : false} placeholder='Email' onChange={(e) => setEmail(e.target.value)}></Screen1Email>
+                <Screen1Pass data-identifier="input-password" type="password" disabled={Loading ? true : false} placeholder='Senha' onChange={(p) => setSenha(p.target.value)}></Screen1Pass>
+                <Screen1Button data-identifier="login-btn" disabled={Loading ? true : false} onClick={LoginAply}>{Loading ? <Circles width={"30px"} color='white'/> : "Salvar"}</Screen1Button>
                 <Link to="/Cadastro" disabled={Loading ? true : false}>
-                    <Scren1Create>Não tem uma conta? Cadastre-se!</Scren1Create>
+                    <Scren1Create data-identifier="sign-up-action">Não tem uma conta? Cadastre-se!</Scren1Create>
                 </Link>
             </Screen1Login>
         </>

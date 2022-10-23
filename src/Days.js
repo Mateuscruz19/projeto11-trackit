@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 
 export default function Days(props){

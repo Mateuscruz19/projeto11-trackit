@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Logo from './assets/img/logo.png'
 import { Link } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState} from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { Circles } from 'react-loader-spinner'
@@ -16,7 +16,6 @@ export default function Register(){
     const [Senha, setSenha] = useState("")
     const [Nome, setNome] = useState("")
     const [Foto, setFoto] = useState("")
-    const [Confirm, setConfirm] = useState(false)
     const [Loading, setLoading] = useState(false)
 
     function Registrar(event){
@@ -61,11 +60,11 @@ export default function Register(){
             <Screen1Register>
                 <GlobalStyle></GlobalStyle>
                 <Screen1Logo src={Logo} alt="Logo em formato de seta indo para cima" />
-                <Screen1Email disabled={Loading ? true : false} placeholder='Email' onChange={(E) => setEmail(E.target.value)}></Screen1Email>
-                <Screen1Pass disabled={Loading ? true : false} placeholder='Senha' onChange={(S) => setSenha(S.target.value)}></Screen1Pass>
-                <Screen1Name disabled={Loading ? true : false} placeholder='Nome' onChange={(N) => setNome(N.target.value)}></Screen1Name>
-                <Screen1Photo disabled={Loading ? true : false} placeholder='Foto' onChange={(F) => setFoto(F.target.value)}></Screen1Photo>
-                    <Screen1Button onClick={Registrar}>{Loading ? <Circles width={"30px"} color="white" /> : "Cadastrar"}</Screen1Button>
+                <Screen1Email data-identifier="input-email" disabled={Loading ? true : false} placeholder='Email' onChange={(E) => setEmail(E.target.value)}></Screen1Email>
+                <Screen1Pass data-identifier="input-password" disabled={Loading ? true : false} placeholder='Senha' onChange={(S) => setSenha(S.target.value)}></Screen1Pass>
+                <Screen1Name data-identifier="input-name" disabled={Loading ? true : false} placeholder='Nome' onChange={(N) => setNome(N.target.value)}></Screen1Name>
+                <Screen1Photo data-identifier="input-photo" disabled={Loading ? true : false} placeholder='Foto' onChange={(F) => setFoto(F.target.value)}></Screen1Photo>
+                    <Screen1Button data-identifier="back-to-login-action" onClick={Registrar}>{Loading ? <Circles width={"30px"} color="white" /> : "Cadastrar"}</Screen1Button>
                     <Link to={"/"}>
                         <Scren1Create>Já tem uma conta? Faça login!</Scren1Create>
                     </Link>
