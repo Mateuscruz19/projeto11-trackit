@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { createGlobalStyle } from "styled-components";
-import { useState, useEffect,useContext } from 'react';
+import { useState,useContext } from 'react';
 import { AuthContext } from './context.js/auth';
 import Check from "./Check";
 import dayjs from "dayjs";
@@ -23,6 +23,9 @@ export default function Hoje(){
      const now = dayjs()
      const Dia = dayjs().format("DD/MM")
      const Format = `${portugueseDays[now.$W]}, ${Dia}`
+
+   
+
 
 
     return(

@@ -5,11 +5,44 @@ import { AuthContext } from './context.js/auth';
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { CircularProgressbar } from 'react-circular-progressbar';
+import Calendar from 'react-calendar';
+import { useState,useEffect } from 'react';
+import 'react-calendar/dist/Calendar.css';
+import axios from "axios";
+import locale from "../node_modules/dayjs/locale/pt-br"
+import dayjs from "dayjs";
 
 export default function Historico(){
 
     const { User } = useContext(AuthContext);
     const { P } = useContext(AuthContext);
+    const [value, onChange] = useState(new Date());
+
+    useEffect(() => {
+
+        const config = {
+            headers: {
+                Authorization: `Bearer ${User.token}`
+            }
+        }
+
+        require('dayjs/locale/pt-br')
+        let now = dayjs().locale('pt-br') 
+        console.log(now)
+        const promise = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/history/daily",config)
+
+        promise.then((res) => {
+            console.log(res.data)
+            console.log("Deu certo")
+         })
+
+         promise.catch((err) => {
+            alert('Erro')
+            console.log(err.response)
+         })
+
+    },[])
+
 
     return(
         <>
@@ -20,8 +53,10 @@ export default function Historico(){
         </Screen2Header>
 
         <Screen2Title data-identifier="habit-page-action">Historico</Screen2Title>
-        <Screen2Text>Em breve você poderá ver o histórico dos seus hábitos aqui!</Screen2Text>
-
+       <Screen2Text>Em breve você poderá ver o histórico dos seus hábitos aqui!</Screen2Text>
+        <Calendario >
+        <Calendar onChange={onChange} value={value}/>
+        </Calendario>
         <Screen2Footer>
             <Link to={"/Habitos"}>
                 <Screen2Habitos>Hábitos</Screen2Habitos>
@@ -39,6 +74,10 @@ export default function Historico(){
     )
 }
 
+const Calendario = styled.div`
+   margin-left:20px;
+`
+
 const Screen2Title = styled.p`
 
     width: 100px;
@@ -52,7 +91,7 @@ const Screen2Title = styled.p`
     line-height: 29px;
     color: #126BA5;
     margin-top:100px;
-    padding:25px;
+    margin-left:20px;
 `
 
 const Screen2Text = styled.p`
@@ -67,9 +106,9 @@ const Screen2Text = styled.p`
     font-size: 17.976px;
     line-height: 22px;
     color: #666666;
-    padding:25px;
-    margin-top:-30px;
-    
+    margin-top:10px;
+    margin-left:20px;
+
     `
 
 const Screen2Header = styled.header`
