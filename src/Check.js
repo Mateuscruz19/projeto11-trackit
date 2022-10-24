@@ -26,11 +26,16 @@ export default function Check(props){
         promise.then((res) => {
             console.log(res.data)
             setHabitos(res.data)
-            let Total = parseInt(100/res.data.length*res.data.filter(y => y.done === true).length)
-            props.t(Total)
-            setP(Total)  
-            if(res.data !== []){
-                props.h(true)
+            
+            if(res.data.length !== 0){
+             let Total = parseInt(100/res.data.length*res.data.filter(y => y.done === true).length)
+                 setP(Total) 
+                 props.t(Total)
+                 props.h(true)
+            }if(res.data.length === 0){
+                props.h(false)
+                props.t(0)
+                setP(0)
             }
          })
 

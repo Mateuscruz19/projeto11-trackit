@@ -51,6 +51,7 @@ export default function Habitos(){
             setNewHabit(false)
             setMore(AddMore+1)
             setNameNewHabit("")
+            setArrayDaysNew([])
          })
 
          promise.catch((err) => {

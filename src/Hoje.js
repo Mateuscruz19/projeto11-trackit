@@ -14,7 +14,7 @@ export default function Hoje(){
     const { User } = useContext(AuthContext);
     const { P } = useContext(AuthContext);
     const [Have, setHave] = useState(false)
-    const [Total, setTotal] = useState(0)
+    const [Total, setTotal] = useState(undefined)
     const [Feitas, setFeitas] = useState(0)
 
 
@@ -34,7 +34,7 @@ export default function Hoje(){
         </Screen2Header>
 
             <Title>{Format}</Title>
-            {Total !== 0 ? <Porcent>{Total}% dos hábitos concluídos</Porcent> : <NotFound>Nenhum hábito concluído ainda</NotFound>}
+            {Have && Total !== 0 ? <Porcent>{Total}% dos hábitos concluídos</Porcent> : <NotFound>Nenhum hábito concluído ainda</NotFound>}
 
             <Check f={setFeitas} ff={Feitas} tt={Total} t={setTotal} h={setHave}></Check>
   

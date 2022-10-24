@@ -121,7 +121,7 @@ const ContainerLoading = styled.div`
 
 const ContainerHabito = styled.div`
 
-    width: 390px;
+    width: 90%;
     height: 110px;
     left: 17px;
     top: 147px;
@@ -134,7 +134,7 @@ const TitleDiv = styled.div`
 
     margin:10px;
     height:25px;
-    width:370px;
+    width: 93%;
     display:flex;
     justify-content:space-between;
 

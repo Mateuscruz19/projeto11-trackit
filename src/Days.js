@@ -14,6 +14,7 @@ export default function Days(props){
 
             if(Clicou === false){
                 setClicou(true)
+                // props.c()
                 props.sa([...props.a,props.index])
                 console.log(props.a)
             }else if(Clicou === true){
@@ -26,7 +27,7 @@ export default function Days(props){
     }
 
     return(
-        <DayButton click={Clicou} onClick={() => ClickDay(props.Day)} >{props.Day}</DayButton>
+        <DayButton click={props.a.includes(props.index)} onClick={() => ClickDay(props.Day)} >{props.Day}</DayButton>
     )
 }
 
